@@ -19,10 +19,11 @@
             android:id="@+id/view_room_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dodger_blue_dark_transparent"
+            android:background="@color/dodger_blue_transparent"
             android:gravity="bottom|center_horizontal"
             android:padding="@dimen/padding_16"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
