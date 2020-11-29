@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.mci.lara.mobile.view.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/rooms"
+        android:name="com.mci.lara.mobile.view.rooms.RoomsFragment"
+        android:label="@string/rooms"
+        tools:layout="@layout/fragment_rooms" />
+
+    <fragment
+        android:id="@+id/devices"
+        android:name="com.mci.lara.mobile.view.devices.DevicesFragment"
+        android:label="@string/devices"
+        tools:layout="@layout/fragment_devices" />
+
+    <fragment
+        android:id="@+id/media"
+        android:name="com.mci.lara.mobile.view.media.MediaFragment"
+        android:label="@string/media"
+        tools:layout="@layout/fragment_media" />
+
+    <fragment
+        android:id="@+id/security"
+        android:name="com.mci.lara.mobile.view.security.SecurityFragment"
+        android:label="@string/security"
+        tools:layout="@layout/fragment_security" />
+
+</navigation>

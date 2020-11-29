@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Lara</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="house_code">House code</string>
+    <string name="home">Home</string>
+    <string name="rooms">Rooms</string>
+    <string name="devices">Devices</string>
+    <string name="media">Media</string>
+    <string name="security">Security</string>
+    <string name="settings">Settings</string>
+</resources>
