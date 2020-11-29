@@ -36,6 +36,7 @@ class LoginViewModel(
             .subscribe(
                 {
                     tokenRepository.save(it.accessToken, it.expiresIn)
+                    userRepository.saveUsername(username)
                     loading.value = false
                     success.value = true
                 },

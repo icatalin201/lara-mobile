@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/login_logo"
+            android:id="@+id/login_logo_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="@dimen/margin_32"
@@ -17,6 +17,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_assistant" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/login_label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_logo_iv" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,10 +40,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/login_username"
+                android:id="@+id/login_username_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/smoke_transparent"
+                android:drawableEnd="@drawable/ic_baseline_person_24"
+                android:drawablePadding="@dimen/padding_16"
                 android:hint="@string/username"
                 android:imeOptions="actionNext"
                 android:inputType="text"
@@ -42,11 +57,13 @@
                 android:textColorHint="@color/smoke" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/login_password"
+                android:id="@+id/login_password_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_16"
                 android:background="@color/smoke_transparent"
+                android:drawableEnd="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="@dimen/padding_16"
                 android:hint="@string/password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"

@@ -8,7 +8,5 @@ Created by Catalin on 11/18/2020
  **/
 data class House(
         val id: UUID,
-        val name: String,
-        val rooms: MutableList<Room>,
-        val users: MutableList<User>
+        val name: String
 )

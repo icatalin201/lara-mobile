@@ -19,14 +19,12 @@ class FeatureRepository(
         return featureClient.getFeature(id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .map { response -> response.feature }
     }
 
-    fun getFeatures(): Single<MutableList<Feature>> {
-        return featureClient.getFeatures()
+    fun getFeatures(username: String): Single<MutableList<Feature>> {
+        return featureClient.getFeatures(username)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .map { response -> response.features }
     }
 
 }

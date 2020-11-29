@@ -13,4 +13,8 @@
     <string name="media">Media</string>
     <string name="security">Security</string>
     <string name="settings">Settings</string>
+    <string name="no_rooms_available">No rooms available</string>
+    <string name="no_devices_available">No devices available</string>
+    <string name="no_media_available">No media available</string>
+    <string name="no_security_available">Security is not available</string>
 </resources>

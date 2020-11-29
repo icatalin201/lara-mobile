@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.databinding.ActivityLoginBinding
 import com.mci.lara.mobile.view.main.MainActivity
-import com.mci.lara.mobile.view.register.RegisterActivity
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
@@ -24,7 +24,10 @@ class LoginActivity : AppCompatActivity() {
         viewModel.isLoading().observe(this) { setLoading(it) }
         viewModel.isSuccess().observe(this) { setSuccess(it) }
         binding.loginBtn.setOnClickListener { viewModel.login() }
-//        binding.loginRegisterBtn.setOnClickListener { openRegister() }
+        binding.loginUsernameEt
+            .addTextChangedListener { e -> viewModel.username = e.toString() }
+        binding.loginPasswordEt
+            .addTextChangedListener { e -> viewModel.password = e.toString() }
     }
 
     private fun setLoading(isLoading: Boolean) {
@@ -33,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
             else -> View.INVISIBLE
         }
         binding.loginBtn.isEnabled = !isLoading
-//        binding.loginRegisterBtn.isEnabled = !isLoading
     }
 
     private fun setSuccess(success: Boolean) {
@@ -47,11 +49,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-    }
-
-    private fun openRegister() {
-        startActivity(Intent(this, RegisterActivity::class.java))
-        finish()
     }
 
 }

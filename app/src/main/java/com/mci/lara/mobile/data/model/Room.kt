@@ -10,6 +10,5 @@ data class Room(
         val id: UUID,
         val name: String,
         val enabled: Boolean,
-        val type: RoomType,
-        val features: MutableList<Feature>
+        val type: RoomType
 )

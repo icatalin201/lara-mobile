@@ -1,8 +1,7 @@
 package com.mci.lara.mobile.data.network
 
+import com.mci.lara.mobile.data.model.User
 import com.mci.lara.mobile.data.network.payload.CreateUserRequest
-import com.mci.lara.mobile.data.network.payload.FindUserResponse
-import com.mci.lara.mobile.data.network.payload.FindUsersResponse
 import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.Body
@@ -18,10 +17,7 @@ Created by Catalin on 11/24/2020
 interface UserClient {
 
     @GET("users/{id}")
-    fun getUser(@Path("id") id: UUID): Single<FindUserResponse>
-
-    @GET("users")
-    fun getUsers(): Single<FindUsersResponse>
+    fun getUser(@Path("id") id: UUID): Single<User>
 
     @POST("users")
     fun register(@Body request: CreateUserRequest): Completable

@@ -1,7 +1,9 @@
 package com.mci.lara.mobile.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -10,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.databinding.ActivityMainBinding
+import com.mci.lara.mobile.view.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +32,13 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings) {
+            openSettings()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setupNavigation() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.home,
@@ -44,5 +54,10 @@ class MainActivity : AppCompatActivity() {
             navController,
             appBarConfiguration
         )
+    }
+
+    private fun openSettings() {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 }

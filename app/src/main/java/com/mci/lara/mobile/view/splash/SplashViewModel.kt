@@ -16,7 +16,8 @@ class SplashViewModel(
     private val loggedIn = MutableLiveData<Boolean>()
 
     init {
-        loggedIn.value = tokenRepository.isLogged()
+//        loggedIn.value = tokenRepository.isLogged()
+        loggedIn.value = true
     }
 
     fun isLoggedIn(): LiveData<Boolean> {

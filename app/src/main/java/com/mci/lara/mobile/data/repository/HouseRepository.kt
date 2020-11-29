@@ -5,7 +5,6 @@ import com.mci.lara.mobile.data.network.HouseClient
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 
 /**
 Lara
@@ -15,11 +14,10 @@ class HouseRepository(
     private val houseClient: HouseClient
 ) {
 
-    fun getHouse(id: UUID): Single<House> {
-        return houseClient.getHouse(id)
+    fun getHouse(username: String): Single<House> {
+        return houseClient.getHouse(username)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .map { response -> response.house }
     }
 
 }

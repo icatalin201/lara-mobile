@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.databinding.FragmentMediaBinding
+import org.koin.android.ext.android.inject
 
 /**
 Lara
@@ -16,6 +17,7 @@ Created by Catalin on 11/29/2020
 class MediaFragment : Fragment() {
 
     private lateinit var binding: FragmentMediaBinding
+    private val viewModel: MediaViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,

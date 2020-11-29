@@ -5,6 +5,7 @@ import com.mci.lara.mobile.data.network.LoginClient
 import com.mci.lara.mobile.data.network.UserClient
 import com.mci.lara.mobile.data.network.payload.AuthorizationResponse
 import com.mci.lara.mobile.data.network.payload.CreateUserRequest
+import com.mci.lara.mobile.util.SharedPreferencesUtil
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,8 +17,21 @@ Created by Catalin on 11/24/2020
  **/
 class UserRepository(
     private val userClient: UserClient,
-    private val loginClient: LoginClient
+    private val loginClient: LoginClient,
+    private val sharedPreferencesUtil: SharedPreferencesUtil
 ) {
+
+    companion object {
+        private const val USERNAME_VALUE_KEY = "LARA.Username.Value"
+    }
+
+    fun saveUsername(username: String) {
+        sharedPreferencesUtil.save(USERNAME_VALUE_KEY, username)
+    }
+
+    fun getUsername(): String {
+        return sharedPreferencesUtil.get(USERNAME_VALUE_KEY, "")
+    }
 
     fun login(username: String, password: String): Single<AuthorizationResponse> {
         return loginClient

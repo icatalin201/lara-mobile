@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/view_room_cv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/margin_8"
+        app:cardBackgroundColor="@color/dodger_blue_dark"
+        app:cardCornerRadius="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/view_room_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/view_room_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dodger_blue_dark_transparent"
+            android:gravity="bottom|center_horizontal"
+            android:padding="@dimen/padding_16"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

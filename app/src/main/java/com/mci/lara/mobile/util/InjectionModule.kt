@@ -2,8 +2,11 @@ package com.mci.lara.mobile.util
 
 import com.mci.lara.mobile.data.network.*
 import com.mci.lara.mobile.data.repository.*
+import com.mci.lara.mobile.view.devices.DevicesViewModel
 import com.mci.lara.mobile.view.login.LoginViewModel
+import com.mci.lara.mobile.view.media.MediaViewModel
 import com.mci.lara.mobile.view.register.RegisterViewModel
+import com.mci.lara.mobile.view.rooms.RoomsViewModel
 import com.mci.lara.mobile.view.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -30,13 +33,16 @@ object InjectionModule {
 
         single { HouseRepository(get()) }
         single { RoomRepository(get()) }
-        single { UserRepository(get(), get()) }
+        single { UserRepository(get(), get(), get()) }
         single { FeatureRepository(get()) }
         single { TokenRepository(get()) }
 
         viewModel { LoginViewModel(get(), get()) }
         viewModel { RegisterViewModel(get()) }
         viewModel { SplashViewModel(get()) }
+        viewModel { RoomsViewModel(get(), get()) }
+        viewModel { DevicesViewModel() }
+        viewModel { MediaViewModel() }
 
     }
 
