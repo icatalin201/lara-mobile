@@ -23,6 +23,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.room.RoomActivity"
+            android:theme="@style/Theme.Lara.Full" />
+        <activity
             android:name=".view.settings.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".view.main.MainActivity"

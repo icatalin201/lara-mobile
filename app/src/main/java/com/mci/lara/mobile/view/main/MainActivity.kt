@@ -27,18 +27,6 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settings) {
-            openSettings()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun setupNavigation() {
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.home,
@@ -54,10 +42,5 @@ class MainActivity : AppCompatActivity() {
             navController,
             appBarConfiguration
         )
-    }
-
-    private fun openSettings() {
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
     }
 }

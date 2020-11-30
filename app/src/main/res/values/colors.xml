@@ -5,6 +5,7 @@
     <color name="smoke">#FF909090</color>
 
     <color name="smoke_transparent">#33909090</color>
+    <color name="black_transparent">#66000000</color>
     <color name="dodger_blue_transparent">#663d5afd</color>
 
     <color name="dodger_blue_primary">#3d5afd</color>

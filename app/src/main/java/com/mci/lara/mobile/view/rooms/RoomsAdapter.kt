@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.data.model.Room
-import com.mci.lara.mobile.data.model.RoomType
 import com.mci.lara.mobile.databinding.ViewRoomBinding
 import com.squareup.picasso.Picasso
 
@@ -14,13 +13,15 @@ import com.squareup.picasso.Picasso
  * Lara
  * Created by Catalin on 11/29/2020
  **/
-class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
+class RoomsAdapter(
+    private val listener: RoomClickListener
+) : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
-    private val roomsList = mutableListOf<Room>()
+    private val roomList = mutableListOf<Room>()
 
     fun submitList(rooms: MutableList<Room>) {
-        roomsList.clear()
-        roomsList.addAll(rooms)
+        roomList.clear()
+        roomList.addAll(rooms)
         notifyDataSetChanged()
     }
 
@@ -32,11 +33,11 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
-        holder.render(roomsList[position])
+        holder.render(roomList[position])
     }
 
     override fun getItemCount(): Int {
-        return roomsList.size
+        return roomList.size
     }
 
     inner class RoomsViewHolder(
@@ -45,16 +46,11 @@ class RoomsAdapter : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
         fun render(room: Room) {
             binding.viewRoomTv.text = room.name
-            val image = when (room.type) {
-                RoomType.BEDROOM -> R.drawable.bedroom
-                RoomType.BATHROOM -> R.drawable.bathroom
-                RoomType.KITCHEN -> R.drawable.kitchen
-                RoomType.LIVING_ROOM -> R.drawable.livingroom
-            }
-            Picasso.get().load(image)
+            Picasso.get().load(room.type.image)
                 .centerCrop()
                 .fit()
                 .into(binding.viewRoomIv)
+            binding.viewRoomCv.setOnClickListener { listener.onClick(room) }
         }
 
     }

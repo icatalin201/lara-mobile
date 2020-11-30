@@ -17,4 +17,11 @@
     <string name="no_devices_available">No devices available</string>
     <string name="no_media_available">No media available</string>
     <string name="no_security_available">Security is not available</string>
+    <string name="view_mode">View mode</string>
+    <string name="view_mode_list">List</string>
+    <string name="view_mode_grid">Grid</string>
+    <array name="view_modes">
+        <item>@string/view_mode_list</item>
+        <item>@string/view_mode_grid</item>
+    </array>
 </resources>

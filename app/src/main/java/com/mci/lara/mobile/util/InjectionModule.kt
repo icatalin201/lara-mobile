@@ -6,6 +6,7 @@ import com.mci.lara.mobile.view.devices.DevicesViewModel
 import com.mci.lara.mobile.view.login.LoginViewModel
 import com.mci.lara.mobile.view.media.MediaViewModel
 import com.mci.lara.mobile.view.register.RegisterViewModel
+import com.mci.lara.mobile.view.room.RoomViewModel
 import com.mci.lara.mobile.view.rooms.RoomsViewModel
 import com.mci.lara.mobile.view.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -43,6 +44,7 @@ object InjectionModule {
         viewModel { RoomsViewModel(get(), get()) }
         viewModel { DevicesViewModel() }
         viewModel { MediaViewModel() }
+        viewModel { RoomViewModel(get(), get()) }
 
     }
 

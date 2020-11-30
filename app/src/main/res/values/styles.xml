@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/dodger_blue_dark</item>
         <item name="colorAccent">@color/heliotrope_primary</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowBackground">@drawable/gradient_background</item>
     </style>
 
@@ -19,6 +20,10 @@
     <style name="Theme.Lara.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="Theme.Lara.Full" parent="Theme.Lara">
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
 </resources>
