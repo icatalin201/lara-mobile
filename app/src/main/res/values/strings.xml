@@ -20,6 +20,9 @@
     <string name="view_mode">View mode</string>
     <string name="view_mode_list">List</string>
     <string name="view_mode_grid">Grid</string>
+    <string name="no_features_available">No features available</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
     <array name="view_modes">
         <item>@string/view_mode_list</item>
         <item>@string/view_mode_grid</item>

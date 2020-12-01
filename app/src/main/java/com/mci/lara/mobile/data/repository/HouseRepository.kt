@@ -3,8 +3,7 @@ package com.mci.lara.mobile.data.repository
 import com.mci.lara.mobile.data.model.House
 import com.mci.lara.mobile.data.network.HouseClient
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 /**
 Lara
@@ -15,9 +14,12 @@ class HouseRepository(
 ) {
 
     fun getHouse(username: String): Single<House> {
-        return houseClient.getHouse(username)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
+        return Single.fromCallable {
+            House(UUID.randomUUID(), "Home Sweet Home")
+        }
+//        return houseClient.getHouse(username)
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeOn(Schedulers.io())
     }
 
 }

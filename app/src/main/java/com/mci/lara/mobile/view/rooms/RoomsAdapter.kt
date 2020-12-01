@@ -45,7 +45,6 @@ class RoomsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun render(room: Room) {
-            binding.viewRoomCv.isEnabled = room.enabled
             binding.viewRoomTv.text = room.name
             Picasso.get().load(room.type.image)
                 .centerCrop()

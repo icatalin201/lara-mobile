@@ -2,11 +2,13 @@ package com.mci.lara.mobile.view.room
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.data.model.Feature
+import com.mci.lara.mobile.data.model.Room
 import com.mci.lara.mobile.data.model.RoomType
 import com.mci.lara.mobile.databinding.ActivityRoomBinding
 import com.squareup.picasso.Picasso
@@ -40,7 +42,7 @@ class RoomActivity : AppCompatActivity() {
             .fit()
             .into(binding.roomImageIv)
         binding.roomFeaturesRv.layoutManager = GridLayoutManager(this, 2)
-        viewModel.getRoom().observe(this) { }
+        viewModel.getRoom().observe(this) { setRoom(it) }
         viewModel.getFeatureList().observe(this) { setFeatureList(it) }
         viewModel.fetch(roomId)
     }
@@ -56,6 +58,15 @@ class RoomActivity : AppCompatActivity() {
             binding.roomFeaturesRv.adapter = FeaturesAdapter()
         }
         (binding.roomFeaturesRv.adapter as FeaturesAdapter).submitList(features)
+        binding.roomDisclaimerTv.isVisible = features.isEmpty()
+    }
+
+    private fun setRoom(room: Room) {
+        binding.roomStatusTv.text = if (room.enabled) {
+            getString(R.string.active)
+        } else {
+            getString(R.string.inactive)
+        }
     }
 
     private fun setCustomHeightForCover() {

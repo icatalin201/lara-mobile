@@ -6,8 +6,10 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mci.lara.mobile.R
+import com.mci.lara.mobile.data.model.House
 import com.mci.lara.mobile.databinding.FragmentHomeBinding
 import com.mci.lara.mobile.view.settings.SettingsActivity
+import org.koin.android.ext.android.inject
 
 /**
 Lara
@@ -16,6 +18,7 @@ Created by Catalin on 11/29/2020
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel: HomeViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +30,7 @@ class HomeFragment : Fragment() {
             R.layout.fragment_home, container, false
         )
         setHasOptionsMenu(true)
+        viewModel.getHouse().observe(viewLifecycleOwner) { setHouse(it) }
         return binding.root
     }
 
@@ -40,6 +44,10 @@ class HomeFragment : Fragment() {
             openSettings()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setHouse(house: House) {
+        binding.homeRoomTv.text = house.name
     }
 
     private fun openSettings() {

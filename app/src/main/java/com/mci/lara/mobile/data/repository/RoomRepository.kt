@@ -4,8 +4,6 @@ import com.mci.lara.mobile.data.model.Room
 import com.mci.lara.mobile.data.model.RoomType
 import com.mci.lara.mobile.data.network.RoomClient
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.util.*
 
 /**
@@ -17,9 +15,12 @@ class RoomRepository(
 ) {
 
     fun getRoom(id: UUID): Single<Room> {
-        return roomClient.getRoom(id)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
+        return Single.fromCallable {
+            Room(UUID.randomUUID(), "Bedroom", true, RoomType.BEDROOM)
+        }
+//        return roomClient.getRoom(id)
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeOn(Schedulers.io())
     }
 
     fun getRooms(username: String): Single<MutableList<Room>> {

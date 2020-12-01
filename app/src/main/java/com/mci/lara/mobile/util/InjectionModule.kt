@@ -3,6 +3,7 @@ package com.mci.lara.mobile.util
 import com.mci.lara.mobile.data.network.*
 import com.mci.lara.mobile.data.repository.*
 import com.mci.lara.mobile.view.devices.DevicesViewModel
+import com.mci.lara.mobile.view.home.HomeViewModel
 import com.mci.lara.mobile.view.login.LoginViewModel
 import com.mci.lara.mobile.view.media.MediaViewModel
 import com.mci.lara.mobile.view.register.RegisterViewModel
@@ -45,6 +46,7 @@ object InjectionModule {
         viewModel { DevicesViewModel() }
         viewModel { MediaViewModel() }
         viewModel { RoomViewModel(get(), get()) }
+        viewModel { HomeViewModel(get(), get()) }
 
     }
 
