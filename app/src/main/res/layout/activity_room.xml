@@ -23,6 +23,7 @@
                 android:fitsSystemWindows="true"
                 android:theme="@style/Theme.Lara.Toolbar"
                 app:contentScrim="@color/dodger_blue_dark"
+                app:expandedTitleGravity="bottom|end"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,6 +76,7 @@
                 android:id="@+id/room_features_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="@dimen/padding_8"
                 tools:listitem="@layout/view_feature" />
 
         </androidx.core.widget.NestedScrollView>

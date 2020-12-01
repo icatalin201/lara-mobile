@@ -19,7 +19,4 @@ interface FeatureClient {
     @GET("features")
     fun getFeatures(@Query("room") roomId: UUID): Single<MutableList<Feature>>
 
-    @GET("features")
-    fun getFeatures(@Query("user") username: String): Single<MutableList<Feature>>
-
 }

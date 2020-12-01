@@ -12,6 +12,6 @@ Created by Catalin on 11/24/2020
 interface HouseClient {
 
     @GET("houses")
-    fun getHouse(@Query("user") username: String): Single<House>
+    fun getHouse(@Query("username") username: String): Single<House>
 
 }

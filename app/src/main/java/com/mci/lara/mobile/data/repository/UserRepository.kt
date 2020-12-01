@@ -44,14 +44,16 @@ class UserRepository(
         firstName: String,
         lastName: String,
         username: String,
-        password: String
+        password: String,
+        houseCode: String
     ): Completable {
         return userClient.register(
             CreateUserRequest(
                 firstName,
                 lastName,
                 username,
-                password
+                password,
+                houseCode
             )
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

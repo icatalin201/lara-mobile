@@ -20,6 +20,7 @@ class RegisterViewModel(
     var lastName = ""
     var username = ""
     var password = ""
+    var houseCode = ""
 
     fun isLoading(): LiveData<Boolean> {
         return loading
@@ -32,7 +33,7 @@ class RegisterViewModel(
     fun register() {
         loading.value = true
         val disposable = userRepository
-            .register(firstName, lastName, username, password)
+            .register(firstName, lastName, username, password, houseCode)
             .subscribe(
                 {
                     loading.value = false

@@ -42,7 +42,7 @@ class FeaturesAdapter : RecyclerView.Adapter<FeaturesAdapter.FeaturesViewHolder>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun render(feature: Feature) {
-            val text = "${feature.value} ${feature.unit}"
+            val text = String.format("%.2f %s", feature.value, feature.unit)
             binding.featureTextTv.text = text
             binding.featureIconIv.setImageResource(feature.type.icon)
         }

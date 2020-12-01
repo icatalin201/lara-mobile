@@ -17,6 +17,6 @@ interface RoomClient {
     fun getRoom(@Path("id") id: UUID): Single<Room>
 
     @GET("rooms")
-    fun getRooms(@Query("user") username: String): Single<MutableList<Room>>
+    fun getRooms(@Query("house") house: UUID): Single<MutableList<Room>>
 
 }

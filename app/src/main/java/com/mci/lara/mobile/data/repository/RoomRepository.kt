@@ -26,9 +26,9 @@ class RoomRepository(
         return Single.fromCallable {
             mutableListOf(
                 Room(UUID.randomUUID(), "Bedroom", true, RoomType.BEDROOM),
-                Room(UUID.randomUUID(), "Kitchen", true, RoomType.KITCHEN),
-                Room(UUID.randomUUID(), "Bathroom", true, RoomType.BATHROOM),
-                Room(UUID.randomUUID(), "Living room", true, RoomType.LIVING_ROOM)
+                Room(UUID.randomUUID(), "Kitchen", false, RoomType.KITCHEN),
+                Room(UUID.randomUUID(), "Bathroom", false, RoomType.BATHROOM),
+                Room(UUID.randomUUID(), "Living room", false, RoomType.LIVING_ROOM)
             )
         }
 //        return roomClient.getRooms(username)

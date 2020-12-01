@@ -39,7 +39,7 @@ class RoomActivity : AppCompatActivity() {
             .centerCrop()
             .fit()
             .into(binding.roomImageIv)
-        binding.roomFeaturesRv.layoutManager = GridLayoutManager(this, 3)
+        binding.roomFeaturesRv.layoutManager = GridLayoutManager(this, 2)
         viewModel.getRoom().observe(this) { }
         viewModel.getFeatureList().observe(this) { setFeatureList(it) }
         viewModel.fetch(roomId)

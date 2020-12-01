@@ -31,7 +31,7 @@ class FeatureRepository(
                     true,
                     "Temperatura",
                     FeatureType.TEMPERATURE,
-                    20.0,
+                    Random().nextDouble(),
                     "°C",
                     LocalDateTime.now()
                 ),
@@ -40,7 +40,7 @@ class FeatureRepository(
                     true,
                     "Umiditate",
                     FeatureType.HUMIDITY,
-                    35.0,
+                    Random().nextDouble(),
                     "%",
                     LocalDateTime.now()
                 )
