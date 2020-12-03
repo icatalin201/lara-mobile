@@ -31,7 +31,7 @@
                 android:background="@color/black_transparent"
                 android:gravity="bottom|start"
                 android:padding="@dimen/padding_16"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_size_20"
                 android:textStyle="bold" />
 
         </androidx.cardview.widget.CardView>

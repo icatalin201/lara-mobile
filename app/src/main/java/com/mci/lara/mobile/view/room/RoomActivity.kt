@@ -55,7 +55,7 @@ class RoomActivity : AppCompatActivity() {
     private fun setFeatureList(features: MutableList<Feature>) {
         val adapter = binding.roomFeaturesRv.adapter
         if (adapter == null) {
-            binding.roomFeaturesRv.adapter = FeaturesAdapter()
+            binding.roomFeaturesRv.adapter = FeaturesAdapter(this)
         }
         (binding.roomFeaturesRv.adapter as FeaturesAdapter).submitList(features)
         binding.roomDisclaimerTv.isVisible = features.isEmpty()

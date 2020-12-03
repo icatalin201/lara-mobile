@@ -23,6 +23,7 @@
     <string name="no_features_available">No features available</string>
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
+    <string name="last_update">Last update: %1$s</string>
     <array name="view_modes">
         <item>@string/view_mode_list</item>
         <item>@string/view_mode_grid</item>

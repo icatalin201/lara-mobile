@@ -1,5 +1,6 @@
 package com.mci.lara.mobile.view.room
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -7,12 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.data.model.Feature
 import com.mci.lara.mobile.databinding.ViewFeatureBinding
+import com.mci.lara.mobile.util.DateExtensions.formatToString
+import java.time.LocalDateTime
 
 /**
 Lara
 Created by Catalin on 11/30/2020
  **/
-class FeaturesAdapter : RecyclerView.Adapter<FeaturesAdapter.FeaturesViewHolder>() {
+class FeaturesAdapter(
+    private val context: Context
+) : RecyclerView.Adapter<FeaturesAdapter.FeaturesViewHolder>() {
 
     private val featureList = mutableListOf<Feature>()
 
@@ -23,7 +28,7 @@ class FeaturesAdapter : RecyclerView.Adapter<FeaturesAdapter.FeaturesViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeaturesViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+        val inflater = LayoutInflater.from(context)
         val binding: ViewFeatureBinding = DataBindingUtil
             .inflate(inflater, R.layout.view_feature, parent, false)
         return FeaturesViewHolder(binding)
@@ -44,6 +49,10 @@ class FeaturesAdapter : RecyclerView.Adapter<FeaturesAdapter.FeaturesViewHolder>
         fun render(feature: Feature) {
             val text = String.format("%.2f %s", feature.value, feature.unit)
             binding.featureTextTv.text = text
+            binding.featureLastUpdateTv.text = context.getString(
+                R.string.last_update,
+                LocalDateTime.now().formatToString()
+            )
             binding.featureIconIv.setImageResource(feature.type.icon)
         }
 

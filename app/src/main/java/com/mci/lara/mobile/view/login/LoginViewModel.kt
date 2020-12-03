@@ -2,6 +2,7 @@ package com.mci.lara.mobile.view.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.mci.lara.mobile.data.repository.HouseRepository
 import com.mci.lara.mobile.data.repository.TokenRepository
 import com.mci.lara.mobile.data.repository.UserRepository
 import com.mci.lara.mobile.view.BaseViewModel
@@ -12,7 +13,8 @@ Created by Catalin on 11/25/2020
  **/
 class LoginViewModel(
     private val userRepository: UserRepository,
-    private val tokenRepository: TokenRepository
+    private val tokenRepository: TokenRepository,
+    private val houseRepository: HouseRepository
 ) : BaseViewModel() {
 
     private val loading = MutableLiveData<Boolean>()
@@ -34,11 +36,18 @@ class LoginViewModel(
         val disposable = userRepository
             .login(username, password)
             .subscribe(
-                {
-                    tokenRepository.save(it.accessToken, it.expiresIn)
-                    userRepository.saveUsername(username)
-                    loading.value = false
-                    success.value = true
+                { response ->
+                    houseRepository.getHouse(username)
+                        .subscribe(
+                            { house ->
+                                tokenRepository.save(response.accessToken, response.expiresIn)
+                                houseRepository.saveHouseId(house.id)
+                                userRepository.saveUsername(username)
+                                loading.value = false
+                                success.value = true
+                            },
+                            { it.printStackTrace() }
+                        )
                 },
                 {
                     it.printStackTrace()

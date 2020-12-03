@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/padding_16"
                         android:textAlignment="textEnd"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/text_size_20"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent" />
 

@@ -1,12 +1,10 @@
 package com.mci.lara.mobile.data.repository
 
 import com.mci.lara.mobile.data.model.Feature
-import com.mci.lara.mobile.data.model.FeatureType
 import com.mci.lara.mobile.data.network.FeatureClient
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -24,31 +22,9 @@ class FeatureRepository(
     }
 
     fun getFeatures(roomId: UUID): Single<MutableList<Feature>> {
-        return Single.fromCallable {
-            mutableListOf(
-                Feature(
-                    UUID.randomUUID(),
-                    true,
-                    "Temperatura",
-                    FeatureType.TEMPERATURE,
-                    Random().nextDouble(),
-                    "°C",
-                    LocalDateTime.now()
-                ),
-                Feature(
-                    UUID.randomUUID(),
-                    true,
-                    "Umiditate",
-                    FeatureType.HUMIDITY,
-                    Random().nextDouble(),
-                    "%",
-                    LocalDateTime.now()
-                )
-            )
-        }
-//        return featureClient.getFeatures(roomId)
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
+        return featureClient.getFeatures(roomId)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
     }
 
 }

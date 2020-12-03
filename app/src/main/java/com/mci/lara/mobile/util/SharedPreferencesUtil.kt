@@ -18,7 +18,7 @@ class SharedPreferencesUtil(
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    fun get(key: String, defaultValue: String): String {
+    fun get(key: String, defaultValue: String?): String {
         return Optional
             .ofNullable(sharedPreferences.getString(key, null))
             .orElse(defaultValue)

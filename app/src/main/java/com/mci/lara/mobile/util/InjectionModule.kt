@@ -33,13 +33,13 @@ object InjectionModule {
 
         single { ClientBuilder.createKeycloakClient().create(LoginClient::class.java) }
 
-        single { HouseRepository(get()) }
+        single { HouseRepository(get(), get()) }
         single { RoomRepository(get()) }
         single { UserRepository(get(), get(), get()) }
         single { FeatureRepository(get()) }
         single { TokenRepository(get()) }
 
-        viewModel { LoginViewModel(get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get()) }
         viewModel { RegisterViewModel(get()) }
         viewModel { SplashViewModel(get()) }
         viewModel { RoomsViewModel(get(), get()) }
