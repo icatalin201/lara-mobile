@@ -56,7 +56,7 @@ class RoomViewModel(
     }
 
     private fun postRunnable() {
-        mainHandler.postDelayed(runnable, 5000)
+        mainHandler.postDelayed(runnable, 15000)
     }
 
 }

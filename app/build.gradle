@@ -49,8 +49,8 @@ android {
         }
         production {
             applicationId "com.mci.lara.mobile"
-            buildConfigField 'String', 'API_URL', '"http://192.168.100.30:8888/api/v1/"'
-            buildConfigField 'String', 'KEYCLOAK_URL', '"http://192.168.100.30:8080/"'
+            buildConfigField 'String', 'API_URL', '"http://192.168.100.35/api/v1/"'
+            buildConfigField 'String', 'KEYCLOAK_URL', '"http://192.168.100.35:8080/"'
             buildConfigField 'String', 'CLIENT_ID', '"lara-external"'
         }
     }

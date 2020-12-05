@@ -24,7 +24,7 @@ object InjectionModule {
     val appModule = module {
 
         single { SharedPreferencesUtil(androidApplication()) }
-        single { ClientBuilder.createApiClient() }
+        single { ClientBuilder.createApiClient(get()) }
 
         single { get<Retrofit>().create(UserClient::class.java) }
         single { get<Retrofit>().create(HouseClient::class.java) }
@@ -32,6 +32,8 @@ object InjectionModule {
         single { get<Retrofit>().create(RoomClient::class.java) }
 
         single { ClientBuilder.createKeycloakClient().create(LoginClient::class.java) }
+
+        single { HeaderInterceptor(get()) }
 
         single { HouseRepository(get(), get()) }
         single { RoomRepository(get()) }

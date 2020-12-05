@@ -1,6 +1,5 @@
 package com.mci.lara.mobile.data.model
 
-import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -14,5 +13,5 @@ data class Feature(
     val type: FeatureType,
     val value: Double,
     val unit: String,
-    val recordedOn: LocalDateTime
+    val recordedOn: String
 )

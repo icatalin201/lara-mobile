@@ -9,24 +9,24 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ClientBuilder {
 
-    fun createApiClient(): Retrofit {
-        return build(BuildConfig.API_URL)
+    fun createApiClient(headerInterceptor: HeaderInterceptor): Retrofit {
+        return build(BuildConfig.API_URL, headerInterceptor)
     }
 
     fun createKeycloakClient(): Retrofit {
         return build(BuildConfig.KEYCLOAK_URL)
     }
 
-    private fun build(url: String): Retrofit {
+    private fun build(url: String, headerInterceptor: HeaderInterceptor? = null): Retrofit {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val okHttpClient = OkHttpClient
+        val okHttpClientBuilder = OkHttpClient
             .Builder()
             .addInterceptor(loggingInterceptor)
-            .build()
+        headerInterceptor?.let { okHttpClientBuilder.addInterceptor(it) }
         return Retrofit.Builder()
             .baseUrl(url)
-            .client(okHttpClient)
+            .client(okHttpClientBuilder.build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
