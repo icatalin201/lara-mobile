@@ -10,13 +10,21 @@ import retrofit2.http.POST
 Lara
 Created by Catalin on 11/29/2020
  **/
-interface LoginClient {
+interface TokenClient {
 
     @FormUrlEncoded
     @POST("auth/realms/lara/protocol/openid-connect/token")
     fun login(
         @Field("username") username: String,
         @Field("password") password: String,
+        @Field("grant_type") grantType: String,
+        @Field("client_id") clientId: String,
+    ): Single<AuthorizationResponse>
+
+    @FormUrlEncoded
+    @POST("auth/realms/lara/protocol/openid-connect/token")
+    fun refreshToken(
+        @Field("refresh_token") refreshToken: String,
         @Field("grant_type") grantType: String,
         @Field("client_id") clientId: String,
     ): Single<AuthorizationResponse>

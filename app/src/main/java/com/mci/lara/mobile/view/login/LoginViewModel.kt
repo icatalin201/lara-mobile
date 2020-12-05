@@ -37,7 +37,11 @@ class LoginViewModel(
             .login(username, password)
             .subscribe(
                 { response ->
-                    tokenRepository.save(response.accessToken, response.expiresIn)
+                    tokenRepository.save(
+                        response.accessToken,
+                        response.refreshToken,
+                        response.expiresIn
+                    )
                     houseRepository.getHouse(username)
                         .subscribe(
                             { house ->

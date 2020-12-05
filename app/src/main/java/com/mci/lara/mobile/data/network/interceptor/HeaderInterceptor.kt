@@ -1,4 +1,4 @@
-package com.mci.lara.mobile.data.network
+package com.mci.lara.mobile.data.network.interceptor
 
 import com.mci.lara.mobile.data.repository.TokenRepository
 import okhttp3.Interceptor
