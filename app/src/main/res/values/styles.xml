@@ -26,4 +26,11 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="Theme.Lara.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/gradient_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+
 </resources>

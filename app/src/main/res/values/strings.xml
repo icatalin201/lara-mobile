@@ -28,4 +28,12 @@
         <item>@string/view_mode_list</item>
         <item>@string/view_mode_grid</item>
     </array>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Yes</string>
+    <string name="prompt_info_title">Lara Authentication</string>
+    <string name="prompt_info_cancel">Cancel</string>
+    <string name="use_biometrics">Use fingerprint to login</string>
+    <string name="biometrics_activated">Fingerprint login is activated</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirmation_message">Are you sure you want to logout?</string>
 </resources>

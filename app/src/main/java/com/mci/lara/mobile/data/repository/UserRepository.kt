@@ -30,7 +30,7 @@ class UserRepository(
     }
 
     fun getUsername(): String {
-        return sharedPreferencesUtil.get(USERNAME_VALUE_KEY, "")
+        return sharedPreferencesUtil.get(USERNAME_VALUE_KEY, "")!!
     }
 
     fun login(username: String, password: String): Single<AuthorizationResponse> {

@@ -20,31 +20,16 @@ class RoomViewModel(
 
     private val featureList = MutableLiveData<MutableList<Feature>>()
     private val room = MutableLiveData<Room>()
-    private var roomId: UUID? = null
-    private val runnable: Runnable = Runnable {
-        val featuresSubscription = roomId?.let { id ->
-            featureRepository
-                .getFeatures(id)
-                .subscribe({
-                    this.featureList.value = it
-                    postRunnable()
-                }, { it.printStackTrace() })
-        }
-        featuresSubscription?.let { compositeDisposable.add(it) }
-    }
-
-    override fun onCleared() {
-        mainHandler.removeCallbacks(runnable)
-        super.onCleared()
-    }
 
     fun fetch(roomId: UUID) {
-        this.roomId = roomId
         val roomSubscription = roomRepository
             .getRoom(roomId)
             .subscribe({ this.room.value = it }, { it.printStackTrace() })
+        val featuresSubscription = featureRepository
+            .getFeatures(roomId)
+            .subscribe({ this.featureList.value = it }, { it.printStackTrace() })
         compositeDisposable.add(roomSubscription)
-        mainHandler.post(runnable)
+        compositeDisposable.add(featuresSubscription)
     }
 
     fun getRoom(): LiveData<Room> {
@@ -53,10 +38,6 @@ class RoomViewModel(
 
     fun getFeatureList(): LiveData<MutableList<Feature>> {
         return featureList
-    }
-
-    private fun postRunnable() {
-        mainHandler.postDelayed(runnable, 15000)
     }
 
 }

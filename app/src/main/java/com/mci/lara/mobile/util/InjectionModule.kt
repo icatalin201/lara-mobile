@@ -1,5 +1,6 @@
 package com.mci.lara.mobile.util
 
+import com.mci.lara.mobile.biometrics.CryptographyManager
 import com.mci.lara.mobile.data.network.*
 import com.mci.lara.mobile.data.network.interceptor.HeaderInterceptor
 import com.mci.lara.mobile.data.network.interceptor.RefreshInterceptor
@@ -11,6 +12,7 @@ import com.mci.lara.mobile.view.media.MediaViewModel
 import com.mci.lara.mobile.view.register.RegisterViewModel
 import com.mci.lara.mobile.view.room.RoomViewModel
 import com.mci.lara.mobile.view.rooms.RoomsViewModel
+import com.mci.lara.mobile.view.settings.SettingsViewModel
 import com.mci.lara.mobile.view.splash.SplashViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -27,6 +29,7 @@ object InjectionModule {
 
         single { SharedPreferencesUtil(androidApplication()) }
         single { ClientBuilder.createApiClient(get(), get()) }
+        single { CryptographyManager.create(get()) }
 
         single { get<Retrofit>().create(UserClient::class.java) }
         single { get<Retrofit>().create(HouseClient::class.java) }
@@ -44,14 +47,15 @@ object InjectionModule {
         single { FeatureRepository(get()) }
         single { TokenRepository(get(), get()) }
 
-        viewModel { LoginViewModel(get(), get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get(), get()) }
         viewModel { RegisterViewModel(get()) }
-        viewModel { SplashViewModel(get()) }
+        viewModel { SplashViewModel() }
         viewModel { RoomsViewModel(get(), get()) }
         viewModel { DevicesViewModel() }
         viewModel { MediaViewModel() }
         viewModel { RoomViewModel(get(), get()) }
         viewModel { HomeViewModel(get(), get()) }
+        viewModel { SettingsViewModel(get(), get()) }
 
     }
 

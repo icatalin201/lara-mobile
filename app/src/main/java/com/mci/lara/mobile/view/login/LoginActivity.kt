@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.mci.lara.mobile.R
@@ -23,11 +24,24 @@ class LoginActivity : AppCompatActivity() {
             .setContentView(this, R.layout.activity_login)
         viewModel.isLoading().observe(this) { setLoading(it) }
         viewModel.isSuccess().observe(this) { setSuccess(it) }
+        viewModel.isBiometricsEnabled().observe(this) { setBiometricsEnabled(it) }
         binding.loginBtn.setOnClickListener { viewModel.login() }
         binding.loginUsernameEt
             .addTextChangedListener { e -> viewModel.username = e.toString() }
         binding.loginPasswordEt
             .addTextChangedListener { e -> viewModel.password = e.toString() }
+        binding.loginFingerprintBtn.setOnClickListener { openBiometricDialog() }
+    }
+
+    private fun setBiometricsEnabled(isEnabled: Boolean) {
+        binding.loginFingerprintBtn.isVisible = isEnabled
+        if (isEnabled) {
+            openBiometricDialog()
+        }
+    }
+
+    private fun openBiometricDialog() {
+        viewModel.showBiometricPromptForDecryption(this)
     }
 
     private fun setLoading(isLoading: Boolean) {

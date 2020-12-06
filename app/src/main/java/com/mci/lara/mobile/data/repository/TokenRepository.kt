@@ -34,6 +34,10 @@ class TokenRepository(
         )
     }
 
+    fun save(token: String) {
+        sharedPreferencesUtil.save(TOKEN_VALUE_KEY, token)
+    }
+
     fun refreshToken(): Single<AuthorizationResponse> {
         val refreshToken = getRefresh()
         return tokenClient.refreshToken(
@@ -45,12 +49,12 @@ class TokenRepository(
 
     fun get(): String {
         return sharedPreferencesUtil
-            .get(TOKEN_VALUE_KEY, "")
+            .get(TOKEN_VALUE_KEY, "")!!
     }
 
     fun getRefresh(): String {
         return sharedPreferencesUtil
-            .get(REFRESH_TOKEN_VALUE_KEY, "")
+            .get(REFRESH_TOKEN_VALUE_KEY, "")!!
     }
 
     fun isValid(): Boolean {

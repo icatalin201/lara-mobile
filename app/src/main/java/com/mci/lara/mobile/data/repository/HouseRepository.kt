@@ -26,7 +26,7 @@ class HouseRepository(
     }
 
     fun getHouseId(): UUID {
-        val value: String = sharedPreferencesUtil.get(HOUSE_ID_VALUE_KEY, null)
+        val value: String? = sharedPreferencesUtil.get(HOUSE_ID_VALUE_KEY, null)
         return Optional.ofNullable(value).map { UUID.fromString(it) }.orElse(null)
     }
 

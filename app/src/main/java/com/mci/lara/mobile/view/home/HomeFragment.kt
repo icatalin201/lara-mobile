@@ -1,14 +1,14 @@
 package com.mci.lara.mobile.view.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.mci.lara.mobile.R
 import com.mci.lara.mobile.data.model.House
 import com.mci.lara.mobile.databinding.FragmentHomeBinding
-import com.mci.lara.mobile.view.settings.SettingsActivity
 import org.koin.android.ext.android.inject
 
 /**
@@ -29,30 +29,12 @@ class HomeFragment : Fragment() {
             inflater,
             R.layout.fragment_home, container, false
         )
-        setHasOptionsMenu(true)
         viewModel.getHouse().observe(viewLifecycleOwner) { setHouse(it) }
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settings) {
-            openSettings()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     private fun setHouse(house: House) {
         binding.homeRoomTv.text = house.name
-    }
-
-    private fun openSettings() {
-        val intent = Intent(requireContext(), SettingsActivity::class.java)
-        startActivity(intent)
     }
 
 }

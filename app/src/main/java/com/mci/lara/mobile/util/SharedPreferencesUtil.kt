@@ -2,7 +2,6 @@ package com.mci.lara.mobile.util
 
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
-import java.util.*
 
 class SharedPreferencesUtil(
     context: Application
@@ -18,10 +17,8 @@ class SharedPreferencesUtil(
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    fun get(key: String, defaultValue: String?): String {
-        return Optional
-            .ofNullable(sharedPreferences.getString(key, null))
-            .orElse(defaultValue)
+    fun get(key: String, defaultValue: String?): String? {
+        return sharedPreferences.getString(key, defaultValue)
     }
 
     fun save(key: String, value: Int) {
