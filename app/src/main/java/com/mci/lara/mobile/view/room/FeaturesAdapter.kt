@@ -48,12 +48,16 @@ class FeaturesAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun render(feature: Feature) {
-            val text = String.format("%.2f %s", feature.value, feature.unit)
-            binding.featureTextTv.text = text
-            binding.featureLastUpdateTv.text = LocalDateTime.parse(
-                feature.recordedOn.replaceRange(19, feature.recordedOn.length, ""),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-            ).formatToString()
+            feature.value?.let {
+                val text = String.format("%.2f %s", feature.value, feature.unit)
+                binding.featureTextTv.text = text
+            }
+            feature.recordedOn?.let {
+                binding.featureLastUpdateTv.text = LocalDateTime.parse(
+                    feature.recordedOn.replaceRange(19, feature.recordedOn.length, ""),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+                ).formatToString()
+            }
             binding.featureIconIv.setImageResource(feature.type.icon)
         }
 

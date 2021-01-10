@@ -53,7 +53,10 @@ class LoginViewModel(
             val disposable = tokenRepository
                 .generateToken(username, password)
                 .subscribe(
-                    { viewModelScope.launch { syncData() } },
+                    {
+                        laraRepository.saveUsername(username)
+                        viewModelScope.launch { syncData() }
+                    },
                     {
                         viewModelScope.launch {
                             it.printStackTrace()
@@ -91,12 +94,18 @@ class LoginViewModel(
             viewModelScope.launch {
                 loading.value = true
             }
-            laraRepository.syncHouse()
-            laraRepository.syncRooms()
-            laraRepository.syncFeatures()
-            viewModelScope.launch {
-                loading.value = false
-                success.value = true
+            try {
+                laraRepository.syncData()
+                viewModelScope.launch {
+                    loading.value = false
+                    success.value = true
+                }
+            } catch (ex: RuntimeException) {
+                viewModelScope.launch {
+                    ex.printStackTrace()
+                    loading.value = false
+                    success.value = false
+                }
             }
         }
     }

@@ -34,7 +34,5 @@ interface LaraRepository {
     fun getRoom(id: UUID): LiveData<Room>
     fun getRooms(): LiveData<List<Room>>
     fun getFeatures(roomId: UUID): LiveData<List<Feature>>
-    suspend fun syncHouse()
-    suspend fun syncRooms()
-    suspend fun syncFeatures()
+    suspend fun syncData()
 }

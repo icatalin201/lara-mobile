@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             Toast.makeText(
                 this,
-                "Try again!",
+                "An error occurred while was trying to connect.",
                 Toast.LENGTH_LONG
             ).show()
         }

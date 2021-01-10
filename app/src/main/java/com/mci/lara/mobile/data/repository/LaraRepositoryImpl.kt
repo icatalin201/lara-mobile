@@ -100,27 +100,19 @@ class LaraRepositoryImpl(
         return featureDao.findAllByRoom(roomId)
     }
 
-    override suspend fun syncHouse() {
+    @Throws(RuntimeException::class)
+    override suspend fun syncData() {
         val username = getUsername()
         username?.let {
             val house = laraApiClient.getHouse(username).blockingGet()
+            saveHouseId(house.id)
             saveHouse(house)
-        }
-    }
-
-    override suspend fun syncRooms() {
-        val houseId = getHouseId()
-        houseId?.let {
-            val rooms = laraApiClient.getRooms(houseId).blockingGet()
-            rooms.forEach { saveRoom(it) }
-        }
-    }
-
-    override suspend fun syncFeatures() {
-        val houseId = getHouseId()
-        houseId?.let {
-            val features = laraApiClient.getFeatures(houseId).blockingGet()
-            features.forEach { saveFeature(it) }
+            val rooms = laraApiClient.getRooms(house.id).blockingGet()
+            rooms.forEach { room ->
+                saveRoom(room)
+                val features = laraApiClient.getFeatures(room.id).blockingGet()
+                features.forEach { feature -> saveFeature(feature) }
+            }
         }
     }
 }

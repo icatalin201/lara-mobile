@@ -21,11 +21,11 @@ data class Feature(
     @ColumnInfo
     val type: FeatureType,
     @ColumnInfo
-    val value: Double,
+    val value: Double?,
     @ColumnInfo
     val unit: String,
     @ColumnInfo
-    val recordedOn: String,
+    val recordedOn: String?,
     @ColumnInfo
     val roomId: UUID
 )
