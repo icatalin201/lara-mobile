@@ -14,7 +14,7 @@ class HeaderInterceptor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val token = tokenRepository.get()
+        val token = tokenRepository.getToken()
         val request: Request = chain.request()
             .newBuilder()
             .addHeader(

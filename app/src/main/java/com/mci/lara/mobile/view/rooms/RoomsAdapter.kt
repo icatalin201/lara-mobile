@@ -19,7 +19,7 @@ class RoomsAdapter(
 
     private val roomList = mutableListOf<Room>()
 
-    fun submitList(rooms: MutableList<Room>) {
+    fun submitList(rooms: List<Room>) {
         roomList.clear()
         roomList.addAll(rooms)
         notifyDataSetChanged()

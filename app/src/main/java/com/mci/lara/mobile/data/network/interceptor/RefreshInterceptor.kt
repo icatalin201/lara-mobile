@@ -17,16 +17,12 @@ class RefreshInterceptor(
         val response = chain.proceed(request)
         val statusCode = response.code
         return if (statusCode == 401) {
-            val authResponse = tokenRepository.refreshToken().blockingGet()
-            tokenRepository.save(
-                authResponse.accessToken,
-                authResponse.refreshToken,
-                authResponse.expiresIn
-            )
+            tokenRepository.refreshToken()
+            val token = tokenRepository.getToken()
             val newRequest = request.newBuilder()
                 .addHeader(
                     "Authorization",
-                    "Bearer ${authResponse.accessToken}"
+                    "Bearer $token"
                 ).build()
             chain.proceed(newRequest)
         } else {

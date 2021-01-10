@@ -101,7 +101,7 @@ class CryptographyManagerImpl(
     }
 
     override fun getCipherTextWrapper(): CipherTextWrapper? {
-        val json = sharedPreferences.get(BIOMETRICS_CIPHER_WRAPPER, "")
+        val json = sharedPreferences.get(BIOMETRICS_CIPHER_WRAPPER)
         return Gson().fromJson(json, CipherTextWrapper::class.java)
     }
 }

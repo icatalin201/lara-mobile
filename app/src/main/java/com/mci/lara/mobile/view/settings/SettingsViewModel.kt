@@ -43,22 +43,10 @@ class SettingsViewModel(
                 cryptographyManager.getInitializedCipherForEncryption(CryptographyManager.SECRET_KEY_NAME)
             val biometricPrompt =
                 BiometricPromptUtils.createBiometricPrompt(
-                    activity, { encryptAndStoreToken(it, successRunnable) }
+                    activity, { successRunnable.run() }
                 ) { errorRunnable.run() }
             val promptInfo = BiometricPromptUtils.createPromptInfo(activity)
             biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(cipher))
-        }
-    }
-
-    private fun encryptAndStoreToken(
-        authResult: BiometricPrompt.AuthenticationResult,
-        successRunnable: Runnable
-    ) {
-        authResult.cryptoObject?.cipher?.apply {
-            val token = tokenRepository.get()
-            val encryptedData = cryptographyManager.encryptData(token, this)
-            cryptographyManager.saveCipherTextWrapper(encryptedData)
-            successRunnable.run()
         }
     }
 

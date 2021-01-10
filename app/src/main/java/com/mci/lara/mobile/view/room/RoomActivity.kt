@@ -52,7 +52,7 @@ class RoomActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    private fun setFeatureList(features: MutableList<Feature>) {
+    private fun setFeatureList(features: List<Feature>) {
         val adapter = binding.roomFeaturesRv.adapter
         if (adapter == null) {
             binding.roomFeaturesRv.adapter = FeaturesAdapter(this)

@@ -22,7 +22,7 @@ class FeaturesAdapter(
 
     private val featureList = mutableListOf<Feature>()
 
-    fun submitList(features: MutableList<Feature>) {
+    fun submitList(features: List<Feature>) {
         featureList.clear()
         featureList.addAll(features)
         notifyDataSetChanged()

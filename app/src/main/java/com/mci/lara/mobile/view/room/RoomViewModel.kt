@@ -1,11 +1,10 @@
 package com.mci.lara.mobile.view.room
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.MediatorLiveData
 import com.mci.lara.mobile.data.model.Feature
 import com.mci.lara.mobile.data.model.Room
-import com.mci.lara.mobile.data.repository.FeatureRepository
-import com.mci.lara.mobile.data.repository.RoomRepository
+import com.mci.lara.mobile.data.repository.LaraRepository
 import com.mci.lara.mobile.view.BaseViewModel
 import java.util.*
 
@@ -14,29 +13,22 @@ Lara
 Created by Catalin on 11/30/2020
  **/
 class RoomViewModel(
-    private val roomRepository: RoomRepository,
-    private val featureRepository: FeatureRepository
+    private val laraRepository: LaraRepository
 ) : BaseViewModel() {
 
-    private val featureList = MutableLiveData<MutableList<Feature>>()
-    private val room = MutableLiveData<Room>()
+    private val featureList = MediatorLiveData<List<Feature>>()
+    private val room = MediatorLiveData<Room>()
 
     fun fetch(roomId: UUID) {
-        val roomSubscription = roomRepository
-            .getRoom(roomId)
-            .subscribe({ this.room.value = it }, { it.printStackTrace() })
-        val featuresSubscription = featureRepository
-            .getFeatures(roomId)
-            .subscribe({ this.featureList.value = it }, { it.printStackTrace() })
-        compositeDisposable.add(roomSubscription)
-        compositeDisposable.add(featuresSubscription)
+        featureList.addSource(laraRepository.getFeatures(roomId)) { featureList.value = it }
+        room.addSource(laraRepository.getRoom(roomId)) { room.value = it }
     }
 
     fun getRoom(): LiveData<Room> {
         return room
     }
 
-    fun getFeatureList(): LiveData<MutableList<Feature>> {
+    fun getFeatureList(): LiveData<List<Feature>> {
         return featureList
     }
 

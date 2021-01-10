@@ -46,7 +46,7 @@ class RoomsFragment : Fragment(), RoomClickListener {
         startActivity(intent)
     }
 
-    private fun setRoomList(roomList: MutableList<Room>) {
+    private fun setRoomList(roomList: List<Room>) {
         val adapter = binding.roomsRv.adapter
         if (adapter == null) {
             binding.roomsRv.adapter = RoomsAdapter(this)

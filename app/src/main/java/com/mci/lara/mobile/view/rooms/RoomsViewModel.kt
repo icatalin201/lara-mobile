@@ -1,10 +1,8 @@
 package com.mci.lara.mobile.view.rooms
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.mci.lara.mobile.data.model.Room
-import com.mci.lara.mobile.data.repository.HouseRepository
-import com.mci.lara.mobile.data.repository.RoomRepository
+import com.mci.lara.mobile.data.repository.LaraRepository
 import com.mci.lara.mobile.view.BaseViewModel
 
 /**
@@ -12,19 +10,12 @@ import com.mci.lara.mobile.view.BaseViewModel
  * Created by Catalin on 11/29/2020
  **/
 class RoomsViewModel(
-    private val roomRepository: RoomRepository,
-    private val houseRepository: HouseRepository
+    laraRepository: LaraRepository
 ) : BaseViewModel() {
 
-    private val roomList = MutableLiveData<MutableList<Room>>()
+    private val roomList = laraRepository.getRooms()
 
-    init {
-        val disposable = roomRepository.getRooms(houseRepository.getHouseId())
-            .subscribe({ roomList.value = it }, { it.printStackTrace() })
-        compositeDisposable.add(disposable)
-    }
-
-    fun getRoomList(): LiveData<MutableList<Room>> {
+    fun getRoomList(): LiveData<List<Room>> {
         return roomList
     }
 

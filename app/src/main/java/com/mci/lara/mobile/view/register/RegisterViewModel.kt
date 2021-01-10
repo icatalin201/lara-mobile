@@ -2,15 +2,17 @@ package com.mci.lara.mobile.view.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mci.lara.mobile.data.repository.UserRepository
+import androidx.lifecycle.viewModelScope
+import com.mci.lara.mobile.data.repository.LaraRepository
 import com.mci.lara.mobile.view.BaseViewModel
+import kotlinx.coroutines.launch
 
 /**
 Lara
 Created by Catalin on 11/26/2020
  **/
 class RegisterViewModel(
-    private val userRepository: UserRepository
+    private val laraRepository: LaraRepository
 ) : BaseViewModel() {
 
     private val loading = MutableLiveData<Boolean>()
@@ -32,20 +34,22 @@ class RegisterViewModel(
 
     fun register() {
         loading.value = true
-        val disposable = userRepository
-            .register(firstName, lastName, username, password, houseCode)
-            .subscribe(
-                {
-                    loading.value = false
-                    success.value = true
-                },
-                {
-                    it.printStackTrace()
-                    loading.value = false
-                    success.value = false
-                }
-            )
-        compositeDisposable.add(disposable)
+        viewModelScope.launch {
+            val disposable = laraRepository
+                .register(firstName, lastName, username, password, houseCode)
+                .subscribe(
+                    {
+                        loading.value = false
+                        success.value = true
+                    },
+                    {
+                        it.printStackTrace()
+                        loading.value = false
+                        success.value = false
+                    }
+                )
+            compositeDisposable.add(disposable)
+        }
     }
 
 }

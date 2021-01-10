@@ -3,23 +3,24 @@ package com.mci.lara.mobile.view.login
 import androidx.biometric.BiometricPrompt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.mci.lara.mobile.biometrics.BiometricPromptUtils
-import com.mci.lara.mobile.biometrics.CipherTextWrapper
 import com.mci.lara.mobile.biometrics.CryptographyManager
 import com.mci.lara.mobile.biometrics.CryptographyManager.Companion.SECRET_KEY_NAME
-import com.mci.lara.mobile.data.repository.HouseRepository
+import com.mci.lara.mobile.data.repository.LaraRepository
 import com.mci.lara.mobile.data.repository.TokenRepository
-import com.mci.lara.mobile.data.repository.UserRepository
 import com.mci.lara.mobile.view.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
 Lara
 Created by Catalin on 11/25/2020
  **/
 class LoginViewModel(
-    private val userRepository: UserRepository,
+    private val laraRepository: LaraRepository,
     private val tokenRepository: TokenRepository,
-    private val houseRepository: HouseRepository,
     private val cryptographyManager: CryptographyManager
 ) : BaseViewModel() {
 
@@ -48,37 +49,21 @@ class LoginViewModel(
 
     fun login() {
         loading.value = true
-        val disposable = userRepository
-            .login(username, password)
-            .subscribe(
-                { response ->
-                    tokenRepository.save(
-                        response.accessToken,
-                        response.refreshToken,
-                        response.expiresIn
-                    )
-                    houseRepository.getHouse(username)
-                        .subscribe(
-                            { house ->
-                                houseRepository.saveHouseId(house.id)
-                                userRepository.saveUsername(username)
-                                loading.value = false
-                                success.value = true
-                            },
-                            {
-                                it.printStackTrace()
-                                loading.value = false
-                                success.value = false
-                            }
-                        )
-                },
-                {
-                    it.printStackTrace()
-                    loading.value = false
-                    success.value = false
-                }
-            )
-        compositeDisposable.add(disposable)
+        viewModelScope.launch(Dispatchers.IO) {
+            val disposable = tokenRepository
+                .generateToken(username, password)
+                .subscribe(
+                    { viewModelScope.launch { syncData() } },
+                    {
+                        viewModelScope.launch {
+                            it.printStackTrace()
+                            loading.value = false
+                            success.value = false
+                        }
+                    }
+                )
+            compositeDisposable.add(disposable)
+        }
     }
 
     fun showBiometricPromptForDecryption(
@@ -91,35 +76,28 @@ class LoginViewModel(
             )
             val biometricPrompt = BiometricPromptUtils.createBiometricPrompt(
                 activity
-            ) { decryptServerTokenFromStorage(textWrapper, it) }
+            ) {
+                viewModelScope.launch {
+                    syncData()
+                }
+            }
             val promptInfo = BiometricPromptUtils.createPromptInfo(activity)
             biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(cipher))
         }
     }
 
-    private fun decryptServerTokenFromStorage(
-        textWrapper: CipherTextWrapper,
-        authResult: BiometricPrompt.AuthenticationResult
-    ) {
-        authResult.cryptoObject?.cipher?.let {
-            val token = cryptographyManager.decryptData(textWrapper.cipherText, it)
-            val username = userRepository.getUsername()
-            tokenRepository.save(token)
-            loading.value = true
-            houseRepository.getHouse(username)
-                .subscribe(
-                    { house ->
-                        houseRepository.saveHouseId(house.id)
-                        userRepository.saveUsername(username)
-                        loading.value = false
-                        success.value = true
-                    },
-                    { error ->
-                        error.printStackTrace()
-                        loading.value = false
-                        success.value = false
-                    }
-                )
+    private suspend fun syncData() {
+        withContext(Dispatchers.IO) {
+            viewModelScope.launch {
+                loading.value = true
+            }
+            laraRepository.syncHouse()
+            laraRepository.syncRooms()
+            laraRepository.syncFeatures()
+            viewModelScope.launch {
+                loading.value = false
+                success.value = true
+            }
         }
     }
 }

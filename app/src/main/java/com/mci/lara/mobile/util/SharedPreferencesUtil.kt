@@ -17,8 +17,8 @@ class SharedPreferencesUtil(
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    fun get(key: String, defaultValue: String?): String? {
-        return sharedPreferences.getString(key, defaultValue)
+    fun get(key: String): String? {
+        return sharedPreferences.getString(key, null)
     }
 
     fun save(key: String, value: Int) {
