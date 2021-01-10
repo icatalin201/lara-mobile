@@ -10,8 +10,6 @@ import com.mci.lara.mobile.data.model.Feature
 import com.mci.lara.mobile.databinding.ViewFeatureBinding
 import com.mci.lara.mobile.util.DateExtensions.formatToString
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 /**
@@ -52,16 +50,10 @@ class FeaturesAdapter(
         fun render(feature: Feature) {
             val text = String.format("%.2f %s", feature.value, feature.unit)
             binding.featureTextTv.text = text
-            binding.featureLastUpdateTv.text = context.getString(
-                R.string.last_update,
-                LocalDateTime.parse(
-                    feature.recordedOn.replaceRange(19, feature.recordedOn.length, ""),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-                ).atZone(ZoneOffset.UTC)
-                    .withZoneSameInstant(ZoneId.of("Europe/Bucharest"))
-                    .toLocalTime()
-                    .formatToString()
-            )
+            binding.featureLastUpdateTv.text = LocalDateTime.parse(
+                feature.recordedOn.replaceRange(19, feature.recordedOn.length, ""),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+            ).formatToString()
             binding.featureIconIv.setImageResource(feature.type.icon)
         }
 

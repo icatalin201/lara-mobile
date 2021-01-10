@@ -1,5 +1,6 @@
 package com.mci.lara.mobile.util
 
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -11,6 +12,10 @@ object DateExtensions {
 
     fun LocalTime.formatToString(): String {
         return this.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+    }
+
+    fun LocalDateTime.formatToString(): String {
+        return this.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
     }
 
 }

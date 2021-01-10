@@ -23,7 +23,12 @@ class RefreshInterceptor(
                 authResponse.refreshToken,
                 authResponse.expiresIn
             )
-            intercept(chain)
+            val newRequest = request.newBuilder()
+                .addHeader(
+                    "Authorization",
+                    "Bearer ${authResponse.accessToken}"
+                ).build()
+            chain.proceed(newRequest)
         } else {
             response
         }
