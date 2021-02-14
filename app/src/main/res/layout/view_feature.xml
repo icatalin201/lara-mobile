@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/feature_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_8"
         app:cardBackgroundColor="@color/dodger_blue_primary"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,7 +25,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feature_text_tv"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
                 android:textAlignment="center"
@@ -32,28 +33,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/feature_icon_iv" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/feature_last_update_label_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="@string/last_update"
-                android:textAlignment="textEnd"
-                android:textSize="@dimen/text_size_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feature_text_tv" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/feature_last_update_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
-                android:textSize="@dimen/text_size_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feature_last_update_label_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

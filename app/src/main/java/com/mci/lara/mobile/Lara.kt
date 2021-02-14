@@ -1,7 +1,7 @@
 package com.mci.lara.mobile
 
 import android.app.Application
-import com.mci.lara.mobile.util.InjectionModule
+import com.mci.lara.mobile.data.Injection
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +17,7 @@ class Lara : Application() {
         startKoin {
             androidLogger()
             androidContext(this@Lara)
-            modules(InjectionModule.appModule)
+            modules(Injection.appModule)
         }
     }
 

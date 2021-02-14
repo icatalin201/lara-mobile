@@ -43,13 +43,13 @@ android {
     productFlavors {
         develop {
             applicationId "com.mci.lara.mobile"
-            buildConfigField 'String', 'API_URL', '"http://192.168.100.30:8888/api/v1/"'
+            buildConfigField 'String', 'API_URL', '"http://192.168.100.35:8901/api/v1/"'
             buildConfigField 'String', 'KEYCLOAK_URL', '"http://192.168.100.30:8080/"'
             buildConfigField 'String', 'CLIENT_ID', '"lara-external"'
         }
         production {
             applicationId "com.mci.lara.mobile"
-            buildConfigField 'String', 'API_URL', '"http://192.168.100.35:8888/api/v1/"'
+            buildConfigField 'String', 'API_URL', '"http://192.168.100.35:8901/api/v1/"'
             buildConfigField 'String', 'KEYCLOAK_URL', '"http://192.168.100.35:8080/"'
             buildConfigField 'String', 'CLIENT_ID', '"lara-external"'
         }
@@ -86,13 +86,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$arch_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
-    implementation "androidx.biometric:biometric:$biometric_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
 
     implementation "com.google.android.material:material:$material_version"
 

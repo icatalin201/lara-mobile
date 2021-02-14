@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Lara.Splash"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.splash.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:theme="@style/Theme.Lara.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,23 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.room.RoomActivity"
-            android:theme="@style/Theme.Lara.Full" />
-        <activity
-            android:name=".view.settings.SettingsActivity"
-            android:label="@string/settings"
-            android:parentActivityName=".view.main.MainActivity"
-            android:theme="@style/Theme.Lara" />
-        <activity
-            android:name=".view.register.RegisterActivity"
-            android:label="@string/register"
-            android:theme="@style/Theme.Lara" />
-        <activity
-            android:name=".view.login.LoginActivity"
-            android:label="@string/login"
-            android:theme="@style/Theme.Lara" />
-        <activity
-            android:name=".view.main.MainActivity"
+            android:name=".ui.home.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Lara" />
     </application>
