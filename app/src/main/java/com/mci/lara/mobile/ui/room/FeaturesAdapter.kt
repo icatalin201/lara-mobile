@@ -58,7 +58,7 @@ class FeaturesAdapter(
                         data.recordedOn.replaceRange(19, data.recordedOn.length, ""),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
                     ).formatToString()
-                    Toast.makeText(context, "Updated on: $date", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Updated on: $date", Toast.LENGTH_SHORT).show()
                 }
             }
             binding.featureIconIv.setImageResource(feature.type.icon)
